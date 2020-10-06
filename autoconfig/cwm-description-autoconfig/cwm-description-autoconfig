@@ -1,0 +1,26 @@
+#!/bin/bash
+
+cd /opt/installer
+
+# Add this at the begining of all scripts.
+if [ -f "include/startup.sh" ]; then
+    . include/startup.sh
+elif [ -f "../include/startup.sh" ]; then
+    . ../include/startup.sh
+fi
+
+# delay script until cwm api connection established
+sleep 15
+
+echo "Updating description in CWM backend" | log
+updateServerDescriptionTXT
+
+# disable script after first run
+scriptName=$(basename $BASH_SOURCE)
+rcLocalFile=/etc/rc.local	
+sed -i '/'"${scriptName}"'/s/^/#/g' $rcLocalFile
+sed -i '/'"${scriptName}"'/s/^/#/g' $rcLocalFile.bck
+
+tagScript success
+
+exit 0
