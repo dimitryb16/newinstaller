@@ -56,8 +56,6 @@ waitOrStop 0 "Failed to create swap file"
 sleep 5
 
 #############Changes############
-apt install zip unzip php-zip -y
-
 echo "Installing Drush" | log
 cd $appPath
 export COMPOSER_HOME=/root
