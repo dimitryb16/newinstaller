@@ -61,7 +61,9 @@ apt install zip unzip php-zip -y
 echo "Installing Drush" | log
 cd $appPath
 export COMPOSER_HOME=/root
-composer require drush/drush:8.3.5 -v | log
+#composer require drush/drush:8.3.5 -v | log
+composer global require drush/drush:7.* | log 
+
 waitOrStop 0 "Failed to install Drush"
 
 echo "Creating Website" | log
