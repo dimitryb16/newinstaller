@@ -1,10 +1,5 @@
 #!/bin/bash
 
-CWM_SERVERIP2=`hostname -I | awk '{print $1}'`
-echo "CWM_SERVERIP2 : $CWM_SERVERIP2"
-CWM_DISPLAYED_ADDRESS2="${CWM_SERVERIP2//./-}.cloud-xip.io"
-echo "CWM_DISPLAYED_ADDRESS2 : $CWM_DISPLAYED_ADDRESS2"
-echo "1.1.1.1 $CWM_DISPLAYED_ADDRESS2" >> /etc/hosts
 
 if [ -f "include/startup.sh" ]; then
     . include/startup.sh
@@ -76,6 +71,7 @@ chmod u+x bin/magento
 
 echo "Disabling sign static files and forcing cache refresh" | log
 cd $appPath
+php bin/magento cache:disable config
 bin/magento config:set dev/static/sign 0
 curl https://${CWM_DISPLAYED_ADDRESS} --insecure -o /dev/null
 waitOrStop 0 "Website failed to respond"
