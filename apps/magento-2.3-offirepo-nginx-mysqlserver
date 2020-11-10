@@ -4,7 +4,7 @@ CWM_SERVERIP2=`hostname -I | awk '{print $1}'`
 echo "CWM_SERVERIP2 : $CWM_SERVERIP2"
 CWM_DISPLAYED_ADDRESS2="${CWM_SERVERIP2//./-}.cloud-xip.io"
 echo "CWM_DISPLAYED_ADDRESS2 : $CWM_DISPLAYED_ADDRESS2"
-echo "0 $CWM_DISPLAYED_ADDRESS2" >> /etc/hosts
+echo "1.1.1.1 $CWM_DISPLAYED_ADDRESS2" >> /etc/hosts
 
 if [ -f "include/startup.sh" ]; then
     . include/startup.sh
