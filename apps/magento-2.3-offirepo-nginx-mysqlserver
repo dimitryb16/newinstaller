@@ -1,5 +1,11 @@
 #!/bin/bash
 
+CWM_SERVERIP2=`hostname -I | awk '{print $1}'`
+echo "CWM_SERVERIP2 : $CWM_SERVERIP2"
+CWM_DISPLAYED_ADDRESS2="${CWM_SERVERIP2//./-}.cloud-xip.io"
+echo "CWM_DISPLAYED_ADDRESS2 : $CWM_DISPLAYED_ADDRESS2"
+echo "0 $CWM_DISPLAYED_ADDRESS2" >> /etc/hosts
+
 if [ -f "include/startup.sh" ]; then
     . include/startup.sh
 elif [ -f "../include/startup.sh" ]; then
@@ -12,7 +18,7 @@ checkTagExist mysqld.success
 checkTagExist nginx-enable-php-ssl.success
 
 appPath=/var/www/html
-appVersion=2.3.6
+appVersion=2.3.4
 rootDir=$(rootDir)
 
 echo "Creating Magento Database" | log
