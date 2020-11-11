@@ -13,7 +13,7 @@ checkTagExist mysqld.success
 checkTagExist nginx-enable-php-ssl.success
 
 appPath=/var/www/html
-appVersion=2.3.6
+appVersion=2.3.4
 rootDir=$(rootDir)
 
 echo "Creating Magento Database" | log
@@ -33,7 +33,7 @@ echo "Downloading Magento ${appVersion} from github repo" | log
 mkdir -p $appPath
 cd $rootDir/temp
 # curl -o 2.3.0.tar.gz https://codeload.github.com/magento/magento2/tar.gz/2.3.0
-curlDownload https://codeload.github.com/magento/magento2/tar.gz/$appVersion $appVersion.tar.gz
+curlDownload https://codeload.github.com/magento/magento2/tar.gz/$appVersion $appVersion.tar.gz | log 
 waitOrStop 0 "File not downloaded from official source"
 mv $appVersion.tar.gz $appPath
 
@@ -72,11 +72,11 @@ chmod u+x bin/magento
 
 echo "Disabling sign static files and forcing cache refresh" | log
 cd $appPath
-bin/magento config:set dev/static/sign 0
-curl https://${CWM_DISPLAYED_ADDRESS} --insecure -o /dev/null
+bin/magento config:set dev/static/sign 0 | log 
+curl https://${CWM_DISPLAYED_ADDRESS} --insecure -o /dev/null | log 
 waitOrStop 0 "Website failed to respond"
-bin/magento setup:static-content:deploy -f
-bin/magento cache:clean
+bin/magento setup:static-content:deploy -f | log 
+bin/magento cache:clean | log 
 waitOrStop 0 "Cleanup actions failed"
 
 echo "Setting nginx config" | log
