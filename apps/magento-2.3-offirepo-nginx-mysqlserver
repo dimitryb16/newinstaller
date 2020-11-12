@@ -108,6 +108,7 @@ descriptionAppend "Magento Password: ${ADMINPASSWORD}"
 descriptionAppend " "
 
 echo "Cleaning cache" | log 
+cd $appPath
 bin/magento cache:clean | log 
 waitOrStop 0 "Cleanup actions failed"
 
