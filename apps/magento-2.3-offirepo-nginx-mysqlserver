@@ -81,7 +81,9 @@ cd $appPath
 bin/magento config:set dev/static/sign 0 | log 
 curl https://${CWM_DISPLAYED_ADDRESS} --insecure -o /dev/null | log 
 waitOrStop 0 "Website failed to respond"
-bin/magento setup:static-content:deploy -f | log 
+bin/magento setup:static-content:deploy -f | log
+bin/magento cache:clean | log 
+waitOrStop 0 "Cleanup actions failed"
 
 echo "Setting nginx config" | log
 # main magento config
@@ -107,10 +109,6 @@ descriptionAppend "Magento Username: admin"
 descriptionAppend "Magento Password: ${ADMINPASSWORD}" 
 descriptionAppend " "
 
-echo "Cleaning cache" | log 
-cd $appPath
-bin/magento cache:clean | log 
-waitOrStop 0 "Cleanup actions failed"
 
 tagScript success
 
