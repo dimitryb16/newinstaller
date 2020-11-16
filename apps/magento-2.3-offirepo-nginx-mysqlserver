@@ -81,7 +81,7 @@ echo "Disabling sign static files and forcing cache refresh" | log
 cd $appPath
 bin/magento config:set dev/static/sign 0 | log 
 curl https://${CWM_DISPLAYED_ADDRESS} --insecure -o /dev/null | log 
-waitOrStop 0 "Website failed to respond"
+#waitOrStop 0 "Website failed to respond"
 bin/magento setup:static-content:deploy -f | log
 bin/magento cache:clean | log 
 waitOrStop 0 "Cleanup actions failed"
