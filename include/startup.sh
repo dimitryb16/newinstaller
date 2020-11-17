@@ -74,14 +74,14 @@ function checkOs() {
 
     fi
 
-    if [[ "$OS $OSVersion" != *"Ubuntu"*"18" ]]; then
+   # if [[ "$OS $OSVersion" != *"Ubuntu"*"18" ]]; then
 
-        echo "$OS $OSVersion is not supported, exiting. (1)" | log 1
-        exit 1
+   #     echo "$OS $OSVersion is not supported, exiting. (1)" | log 1
+   #     exit 1
 
-    fi
+   # fi
 
-    echo "Found supported OS: $OS $OSVersion" | log
+   # echo "Found supported OS: $OS $OSVersion" | log
 
 }
 
